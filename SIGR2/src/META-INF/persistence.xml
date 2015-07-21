@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="SIGR">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<class>ec.edu.epn.modelo.entity.Calibracion</class>
+		<class>ec.edu.epn.modelo.entity.Campo</class>
+		<class>ec.edu.epn.modelo.entity.Carrera</class>
+		<class>ec.edu.epn.modelo.entity.Grupo</class>
+		<class>ec.edu.epn.modelo.entity.Lineamiento</class>
+		<class>ec.edu.epn.modelo.entity.Permiso</class>
+		<class>ec.edu.epn.modelo.entity.Pruebareactivo</class>
+		<class>ec.edu.epn.modelo.entity.Prueba</class>
+		<class>ec.edu.epn.modelo.entity.Reactivo</class>
+		<class>ec.edu.epn.modelo.entity.Reactivorespuesta</class>
+		<class>ec.edu.epn.modelo.entity.Respuesta</class>
+		<class>ec.edu.epn.modelo.entity.Rol</class>
+		<class>ec.edu.epn.modelo.entity.Rolpermiso</class>
+		<class>ec.edu.epn.modelo.entity.Taxonomiabloom</class>
+		<class>ec.edu.epn.modelo.entity.Topico</class>
+		<class>ec.edu.epn.modelo.entity.Usuario</class>
+		<class>ec.edu.epn.modelo.entity.Usuariocarrera</class>
+		<class>ec.edu.epn.modelo.entity.Usuariorol</class>
+		<class>ec.edu.epn.modelo.entity.Validacion</class>
+		<class>ec.edu.epn.modelo.entity.Validacionlineamiento</class>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/SIGR"/>
+			<property name="javax.persistence.jdbc.user" value="root"/>
+			<property name="javax.persistence.jdbc.password" value="sigr"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+			<property name="eclipselink.ddl-generation" value="none"/>
+		</properties>
+	</persistence-unit>
+	
+</persistence>

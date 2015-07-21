@@ -1,0 +1,50 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
+	<ui:define name="topContent">
+		<h:form>
+			<p:growl id="messages" />
+			<p:menubar>
+			</p:menubar>
+		</h:form>
+	</ui:define>
+	<ui:define name="content">
+		<h:form>
+			<p:dataTable id="tabla1" var="usuario"
+				value="#{usuarioControl.listUsuarioVerificador}" paginator="true"
+				rows="10">
+				<p:column filterBy="#{usuario.usuarioId}" headerText="id"
+					footerText="contains" filterMatchMode="contains">
+					<h:outputText value="#{usuario.usuarioId}" />
+				</p:column>
+				<!--
+				<p:column filterBy="#{usuario.usuarioApellido}" headerText="Apellido"
+					footerText="contains" filterMatchMode="contains">
+					<h:outputText value="#{usuario.usuarioApellido}" />
+				</p:column>
+				<p:column filterBy="#{usuario.usuarioCedula}" headerText="Cedula"
+					footerText="contains" filterMatchMode="contains">
+					<h:outputText value="#{usuario.usuarioCedula}" />
+				</p:column>
+				
+				<p:column>
+				 				<f:facet name="header">Asignar</f:facet>
+					<h:commandButton value="Asignar" action="#{reactivoControl.editar}">
+						<f:param name="#{reactivoControl.cmdUpdate}"
+							value="#{reactivo.reactivoId}" />
+					</h:commandButton>
+				</p:column>
+				 -->
+	
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
