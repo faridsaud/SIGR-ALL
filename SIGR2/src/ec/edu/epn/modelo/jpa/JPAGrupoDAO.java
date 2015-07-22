@@ -17,10 +17,10 @@ super(Grupo.class);
 }
 @SuppressWarnings("unchecked")
 @Override
-public List<Grupo> findbyNombre(String nombreGrupo) {
+public List<Grupo> findbyNombre(String nombreCampo) {
 	try {
 		Query query = em.createNamedQuery("Grupo.findbyNombre");
-		query.setParameter("nombreGrupo", nombreGrupo);
+		query.setParameter("nombreCampo", nombreCampo);
 		return query.getResultList();
 	} catch (Exception e) {
 		e.printStackTrace();

@@ -7,6 +7,6 @@ import ec.edu.epn.modelo.entity.Grupo;
 
 public interface GrupoDAO extends GenericDAO<Grupo,Integer> {
 
-	public List<Grupo> findbyNombre(String nombreGrupo);
+	public List<Grupo> findbyNombre(String nombreCampo);
 
 }

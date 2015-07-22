@@ -17,10 +17,10 @@ super(Topico.class);
 }
 @SuppressWarnings("unchecked")
 @Override
-public List<Topico> findbyNombre(String nombreTopico) {
+public List<Topico> findbyNombre(String nombreGrupo) {
 	try {
 		Query query = em.createNamedQuery("Topico.findbyNombre");
-		query.setParameter("nombreTopico", nombreTopico);
+		query.setParameter("nombreGrupo", nombreGrupo);
 		return query.getResultList();
 	} catch (Exception e) {
 		e.printStackTrace();

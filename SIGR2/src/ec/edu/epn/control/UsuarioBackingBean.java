@@ -166,9 +166,9 @@ public class UsuarioBackingBean {
 			reactivo.setUsuario(usuario);
 			reactivo.setReactivoEstadoAsignacion("1");			
 			JPADAOFactory.getFactory().getReactivoDAO().update(reactivo);
-			return "reasignarReactivos";
+			return "reasignarReactivos?faces-redirect=true";
 		}
-		return "asignarReactivos";
+		return "asignarReactivos?faces-redirect=true";
 	}
 	public String getCmdAsignarReactivo() {
 		return "cmdAsignarReactivo";

@@ -17,7 +17,11 @@ import ec.edu.epn.modelo.jpa.JPADAOFactory;
 public class ReactivoBackingBean {
 
 	private Reactivo reactivo;
-
+	/*Variable temporal usada para filtrar reactivos por este topico -Creado por: Farid Saud*/
+	private String topico;
+	/*Variable temporal usada para tener la lista de reactivos*/
+	private List<Reactivo> listaAuxiliarReactivosPorAsignar=JPADAOFactory.getFactory().getReactivoDAO().findReactivosPorAsignar();
+	
 	public ReactivoBackingBean() {
 		new ArrayList<Reactivo>();
 	}
@@ -129,20 +133,44 @@ public class ReactivoBackingBean {
 		setReactivo(JPADAOFactory.getFactory().getReactivoDAO().read(id));
 	
 		if(reactivo.getReactivoEstado().equals("Elaborado")){
-			return "asignarReactivosElaborado";
+			return "asignarReactivosElaborado?faces-redirect=true";
 		}
 		if(reactivo.getReactivoEstado().equals("Validado")){
-			return "asignarReactivosValidado";
+			return "asignarReactivosValidado?faces-redirect=true";
 		}
 		if(reactivo.getReactivoEstado().equals("Elaboracion")){
-			return "reasignarReactivosElaboracion";
+			return "reasignarReactivosElaboracion?faces-redirect=true";
 		}
 		
-		return "asignarReactivos";
+		return "asignarReactivos?faces-redirect=true";
 	}
 	public String getCmdAsignar() {
 		return "cmdAsignar";
 	}
+
+	public String getTopico() {
+		return topico;
+	}
+
+	public void setTopico(String topico) {
+		this.topico = topico;
+	}
+	
+	/*Lista de reactivos por reasignar con topico como parametro de busqueda-Modificacion realizada por Farid Saud*/
+	public void changeListAuxiliarReactivoOnTopicoChange() {
+
+		setListaAuxiliarReactivosPorAsignar(JPADAOFactory.getFactory().getReactivoDAO().findReactivosPorAsignarByTopico(topico));
+	}
+	
+	public List<Reactivo> getListaAuxiliarReactivosPorAsignar() {
+		return listaAuxiliarReactivosPorAsignar;
+	}
+
+	public void setListaAuxiliarReactivosPorAsignar(List<Reactivo> listaAuxiliarReactivos) {
+		this.listaAuxiliarReactivosPorAsignar = listaAuxiliarReactivos;
+	}
+
+	
 	
 
 }

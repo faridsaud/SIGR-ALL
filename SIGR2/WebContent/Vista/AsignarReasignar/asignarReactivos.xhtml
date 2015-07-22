@@ -17,51 +17,57 @@
 	</ui:define>
 	<ui:define name="content">
 		<h:form>
-			<p:panelGrid columns="2">
-				<p:outputLabel>
-					Carrera
-				</p:outputLabel>
-				<p:selectOneMenu id="country" value="#{dropdownView.country}"
-					style="width:150px">
-					<p:ajax listener="#{dropdownView.onCountryChange}" update="city" />
-					<f:selectItem itemLabel="Select Country" itemValue=""
-						noSelectionOption="true" />
-					<f:selectItems value="#{dropdownView.countries}" />
-				</p:selectOneMenu>
-				<p:outputLabel>
-					Campo
-				</p:outputLabel>
-				<p:selectOneMenu id="country" value="#{dropdownView.country}"
-					style="width:150px">
-					<p:ajax listener="#{dropdownView.onCountryChange}" update="city" />
-					<f:selectItem itemLabel="Select Country" itemValue=""
-						noSelectionOption="true" />
-					<f:selectItems value="#{dropdownView.countries}" />
-				</p:selectOneMenu>
-				<p:outputLabel>
-					Grupo
-				</p:outputLabel>
-				<p:selectOneMenu id="country" value="#{dropdownView.country}"
-					style="width:150px">
-					<p:ajax listener="#{dropdownView.onCountryChange}" update="city" />
-					<f:selectItem itemLabel="Select Country" itemValue=""
-						noSelectionOption="true" />
-					<f:selectItems value="#{dropdownView.countries}" />
-				</p:selectOneMenu>
-				<p:outputLabel>
-					Topico
-				</p:outputLabel>
-				<p:selectOneMenu id="country" value="#{dropdownView.country}"
-					style="width:150px">
-					<p:ajax listener="#{dropdownView.onCountryChange}" update="city" />
-					<f:selectItem itemLabel="Select Country" itemValue=""
-						noSelectionOption="true" />
-					<f:selectItems value="#{dropdownView.countries}" />
-				</p:selectOneMenu>
-				
-			</p:panelGrid>
+			<p:panel header="Seleccionars filtros" style="margin-bottom:10px;">
+				<p:panelGrid columns="2">
+					<p:outputLabel for="carrera" value="#{msg['asignar.carrera']}" />
+					<p:selectOneMenu id="carrera"
+						value="#{asignacionFiltradoControl.carrera}" style="width:150px">
+						<p:ajax listener="#{asignacionFiltradoControl.onCarreraChange()}"
+							update="campo" />
+						<f:selectItem itemLabel="Select Carrera" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{asignacionFiltradoControl.listaCarreras}" var="carr" 
+    itemLabel="#{carr.carreraNombre}" itemValue="#{carr.carreraNombre}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel for="campo" value="#{msg['asignar.campo']}" />
+					<p:selectOneMenu id="campo"
+						value="#{asignacionFiltradoControl.campo}" style="width:150px">
+						<p:ajax listener="#{asignacionFiltradoControl.onCampoChange()}"
+							update="grupo" />
+						<f:selectItem itemLabel="Select Campo" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{asignacionFiltradoControl.listaCampos}" var="camp" 
+    itemLabel="#{camp.campoNombre}" itemValue="#{camp.campoNombre}"  />
+					</p:selectOneMenu>
+
+					<p:outputLabel for="grupo" value="#{msg['asignar.grupo']}" />
+					<p:selectOneMenu id="grupo"
+						value="#{asignacionFiltradoControl.grupo}" style="width:150px">
+						<p:ajax listener="#{asignacionFiltradoControl.onGrupoChange()}"
+							update="topico" />
+						<f:selectItem itemLabel="Select Grupo" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{asignacionFiltradoControl.listaGrupos}" var="grup" 
+    itemLabel="#{grup.grupoNombre}" itemValue="#{grup.grupoNombre}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel for="topico" value="#{msg['asignar.topico']}" />
+					<p:selectOneMenu id="topico" value="#{reactivoControl.topico}"
+						style="width:150px">
+						<p:ajax listener="#{reactivoControl.changeListAuxiliarReactivoOnTopicoChange()}"
+							update="tabla1" />
+						<f:selectItem itemLabel="Select Topico" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{asignacionFiltradoControl.listaTopicos}" var="topi" 
+    itemLabel="#{topi.topicoNombre}" itemValue="#{topi.topicoNombre}"  />
+					</p:selectOneMenu>
+				</p:panelGrid>
+				<p:separator />
+
+			</p:panel>
 			<p:dataTable id="tabla1" var="reactivo"
-				value="#{reactivoControl.listReactivoPorAsignar}" paginator="true"
+				value="#{reactivoControl.listaAuxiliarReactivosPorAsignar}" paginator="true"
 				rows="10">
 				<p:column filterBy="#{reactivo.reactivoId}" headerText="Id"
 					footerText="contains" filterMatchMode="contains">
@@ -92,8 +98,6 @@
 						action="#{reactivoControl.asignar()}">
 						<f:param name="#{reactivoControl.cmdAsignar}"
 							value="#{reactivo.reactivoId}" />
-
-
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>

@@ -13,5 +13,9 @@ public interface ReactivoDAO extends GenericDAO<Reactivo,Integer> {
 	
 	public List<Reactivo> findReactivosPorReasignar();
 	
+	public List<Reactivo> findReactivosPorAsignarByTopico(String nombreTopico);
+	
+
+	
 
 }

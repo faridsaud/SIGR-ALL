@@ -17,7 +17,8 @@ import java.util.List;
 	@NamedQuery(name="Reactivo.findAllbyEstado", query="SELECT r FROM Reactivo r WHERE r.reactivoEstado=:estadoReactivo"),
 	@NamedQuery(name="Reactivo.findAllbyEstadoAsignacion", query="SELECT r FROM Reactivo r WHERE r.reactivoEstadoAsignacion=:estadoAsignacionReactivo"),
 	@NamedQuery(name="Reactivo.findReactivosPorAsignar", query="SELECT r FROM Reactivo r WHERE r.reactivoEstadoAsignacion='0' AND r.reactivoEstado IN ('Elaborado','Validado')"),
-	@NamedQuery(name="Reactivo.findReactivosPorReasignar", query="SELECT r FROM Reactivo r WHERE r.reactivoEstado IN ('Elaboracion')")
+	@NamedQuery(name="Reactivo.findReactivosPorReasignar", query="SELECT r FROM Reactivo r WHERE r.reactivoEstado IN ('Elaboracion')"),
+	@NamedQuery(name="Reactivo.findReactivosPorAsignarByTopico", query="SELECT r FROM Reactivo r WHERE r.reactivoEstadoAsignacion='0' AND r.reactivoEstado IN ('Elaborado','Validado') AND r.topico.topicoNombre=:nombreTopico")
 
 })
 public class Reactivo implements Serializable {

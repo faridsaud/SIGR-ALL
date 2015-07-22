@@ -6,6 +6,6 @@ import ec.edu.epn.modelo.entity.Campo;
 
 public interface CampoDAO extends GenericDAO<Campo,Integer> {
 
-	public List<Campo> findbyNombre(String nombreCampo);
+	public List<Campo> findbyNombre(String nombreCarrera);
 
 }

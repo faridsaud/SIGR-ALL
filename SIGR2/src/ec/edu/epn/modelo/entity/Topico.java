@@ -15,7 +15,7 @@ import java.util.List;
 @Table(name="TOPICO")
 @NamedQueries({
 	@NamedQuery(name="Topico.findAll", query="SELECT t FROM Topico t"),
-	@NamedQuery(name="Topico.findbyNombre", query="SELECT t FROM Topico t WHERE t.topicoNombre=:nombreTopico"),
+	@NamedQuery(name="Topico.findbyNombre", query="SELECT t FROM Topico t WHERE t.grupo.grupoNombre=:nombreGrupo"),
 
 })
 public class Topico implements Serializable {
