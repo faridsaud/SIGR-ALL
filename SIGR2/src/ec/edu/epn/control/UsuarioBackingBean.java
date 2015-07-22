@@ -1,6 +1,7 @@
 package ec.edu.epn.control;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import ec.edu.epn.modelo.entity.Reactivo;
 import ec.edu.epn.modelo.entity.Usuario;
 import ec.edu.epn.modelo.entity.Usuariorol;
 import ec.edu.epn.modelo.jpa.JPADAOFactory;
@@ -85,11 +87,11 @@ public class UsuarioBackingBean {
 	public String nuevo() {
 		return "usuario_new";
 	}
-	/*Lista de usuarios con el rol de verificador*/
-	public List<Usuario> getListUsuarioVerificador() {
+	/*Lista de usuarios con el rol de validador*/
+	public List<Usuario> getListUsuarioValidador() {
 		
 		ArrayList<Usuario> listaUsuario=new ArrayList<Usuario>();
-		List<Usuariorol> lista=JPADAOFactory.getFactory().getUsuariorolDAO().findAllbyRol("Verificador");
+		List<Usuariorol> lista=JPADAOFactory.getFactory().getUsuariorolDAO().findAllbyRol("Validador");
 		for (Usuariorol usuariorol : lista) {
 			listaUsuario.add(usuariorol.getUsuario());
 		}
@@ -97,7 +99,7 @@ public class UsuarioBackingBean {
 		
 	}
 
-	public void setListUsuarioVerificador(List<Usuario> listUsuario) {
+	public void setListUsuarioValidador(List<Usuario> listUsuario) {
 	}
 
 	/*Lista de usuarios con el rol de calibrador*/
@@ -113,5 +115,65 @@ public class UsuarioBackingBean {
 	}
 
 	public void setListUsuarioCalibrador(List<Usuario> listUsuario) {
+	}
+
+	/*Lista de usuarios con el rol de elaborador*/
+	public List<Usuario> getListUsuarioElaborador() {
+		
+		ArrayList<Usuario> listaUsuario=new ArrayList<Usuario>();
+		List<Usuariorol> lista=JPADAOFactory.getFactory().getUsuariorolDAO().findAllbyRol("Elaborador");
+		for (Usuariorol usuariorol : lista) {
+			listaUsuario.add(usuariorol.getUsuario());
+		}
+		return listaUsuario;	
+		
+	}
+
+	public void setListUsuarioElaborador(List<Usuario> listUsuario) {
+	}
+	/*Funcion para asignar un reactivo al usuario*/
+	public String asignarReactivo(){
+		/*
+		FacesContext context = FacesContext.getCurrentInstance();
+		int id = Integer.parseInt(this.getParameter(context, this.getCmdAsignarReactivo()));
+		setUsuario(JPADAOFactory.getFactory().getUsuarioDAO().read(id));
+		int id2 = Integer.parseInt(this.getParameter(context, this.getCmdReactivo()));
+		*/
+
+		  Map<String,String> params = 
+	                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+		int id = Integer.parseInt(params.get(this.getCmdAsignarReactivo()));
+	  	int id2 = Integer.parseInt(params.get(this.getCmdReactivo()));
+		setUsuario(JPADAOFactory.getFactory().getUsuarioDAO().read(id));
+		Reactivo reactivo=JPADAOFactory.getFactory().getReactivoDAO().read(id2);
+		if(reactivo.getReactivoEstado().equals("Elaborado")){
+			reactivo.setReactivoEstado("Validacion");
+			Date fechaActual=new Date();
+			reactivo.setReactivoFechaAsignacionValidacion(fechaActual);
+			reactivo.setUsuario(usuario);
+			reactivo.setReactivoEstadoAsignacion("1");
+			JPADAOFactory.getFactory().getReactivoDAO().update(reactivo);
+		}
+		if(reactivo.getReactivoEstado().equals("Validado")){
+			reactivo.setReactivoEstado("Calibracion");
+			Date fechaActual=new Date();
+			reactivo.setReactivoFechaAsignacionCalibracion(fechaActual);
+			reactivo.setUsuario(usuario);
+			reactivo.setReactivoEstadoAsignacion("1");			
+			JPADAOFactory.getFactory().getReactivoDAO().update(reactivo);
+		}
+		if(reactivo.getReactivoEstado().equals("Elaboracion")){
+			reactivo.setUsuario(usuario);
+			reactivo.setReactivoEstadoAsignacion("1");			
+			JPADAOFactory.getFactory().getReactivoDAO().update(reactivo);
+			return "reasignarReactivos";
+		}
+		return "asignarReactivos";
+	}
+	public String getCmdAsignarReactivo() {
+		return "cmdAsignarReactivo";
+	}
+	public String getCmdReactivo() {
+		return "cmdReactivo";
 	}
 }

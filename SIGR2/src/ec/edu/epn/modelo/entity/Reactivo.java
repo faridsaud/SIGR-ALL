@@ -14,7 +14,11 @@ import java.util.List;
 @Table(name="REACTIVO")
 @NamedQueries({
 	@NamedQuery(name="Reactivo.findAll", query="SELECT r FROM Reactivo r"),
-	@NamedQuery(name="Reactivo.findAllbyEstado", query="SELECT r FROM Reactivo r WHERE r.reactivoEstado=:estadoReactivo")
+	@NamedQuery(name="Reactivo.findAllbyEstado", query="SELECT r FROM Reactivo r WHERE r.reactivoEstado=:estadoReactivo"),
+	@NamedQuery(name="Reactivo.findAllbyEstadoAsignacion", query="SELECT r FROM Reactivo r WHERE r.reactivoEstadoAsignacion=:estadoAsignacionReactivo"),
+	@NamedQuery(name="Reactivo.findReactivosPorAsignar", query="SELECT r FROM Reactivo r WHERE r.reactivoEstadoAsignacion='0' AND r.reactivoEstado IN ('Elaborado','Validado')"),
+	@NamedQuery(name="Reactivo.findReactivosPorReasignar", query="SELECT r FROM Reactivo r WHERE r.reactivoEstado IN ('Elaboracion')")
+
 })
 public class Reactivo implements Serializable {
 	private static final long serialVersionUID = 1L;

@@ -99,5 +99,50 @@ public class ReactivoBackingBean {
 
 	public void setListReactivoVerificado(List<Reactivo> listReactivo) {
 	}	
+	/*Lista de reactivos por asignar-Modificacion realizada por Farid Saud*/
+	public List<Reactivo> getListReactivoPorAsignar() {
+
+		return JPADAOFactory.getFactory().getReactivoDAO().findReactivosPorAsignar();
+	}
+
+	public void setListReactivoPorAsignar(List<Reactivo> listReactivo) {
+	}	
+
+	/*Lista de reactivos por reasignar-Modificacion realizada por Farid Saud*/
+	public List<Reactivo> getListReactivoPorReasignar() {
+
+		return JPADAOFactory.getFactory().getReactivoDAO().findReactivosPorReasignar();
+	}
+
+	public void setListReactivoPorReasignar(List<Reactivo> listReactivo) {
+	}	
+	/*Funcion de asignacion de reactivos -Modificacion realizada por Farid Saud*/	
+	public String asignar(){
+		
+		Map<String,String> params = 
+	                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+		  int id = Integer.parseInt(params.get(this.getCmdAsignar()));
+		/*
+		FacesContext context = FacesContext.getCurrentInstance();
+		int id = Integer.parseInt(this.getParameter(context, this.getCmdAsignar()));
+		*/
+		setReactivo(JPADAOFactory.getFactory().getReactivoDAO().read(id));
+	
+		if(reactivo.getReactivoEstado().equals("Elaborado")){
+			return "asignarReactivosElaborado";
+		}
+		if(reactivo.getReactivoEstado().equals("Validado")){
+			return "asignarReactivosValidado";
+		}
+		if(reactivo.getReactivoEstado().equals("Elaboracion")){
+			return "reasignarReactivosElaboracion";
+		}
+		
+		return "asignarReactivos";
+	}
+	public String getCmdAsignar() {
+		return "cmdAsignar";
+	}
+	
 
 }

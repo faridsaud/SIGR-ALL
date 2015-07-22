@@ -7,4 +7,11 @@ public interface ReactivoDAO extends GenericDAO<Reactivo,Integer> {
 
 	public List<Reactivo> findAllbyEstado(String estadoReactivo);
 
+	public List<Reactivo> findAllbyEstadoAsignacion(String estadoAsignacionReactivo);
+	
+	public List<Reactivo> findReactivosPorAsignar();
+	
+	public List<Reactivo> findReactivosPorReasignar();
+	
+
 }

@@ -20,4 +20,14 @@ public abstract class DAOFactory {
     public abstract UsuariorolDAO getUsuariorolDAO();
 
     public abstract RolDAO getRolDAO();
+    
+    public abstract CarreraDAO getCarreraDAO();
+    
+    public abstract GrupoDAO getGrupoDAO();
+    
+    public abstract TopicoDAO getTopicoDAO();
+    
+    
+
+
 }

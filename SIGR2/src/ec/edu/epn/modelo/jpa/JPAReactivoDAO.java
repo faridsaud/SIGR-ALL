@@ -28,4 +28,44 @@ public class JPAReactivoDAO extends JPAGenericDAO<Reactivo, Integer> implements
 			return new ArrayList<Reactivo>();
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Reactivo> findAllbyEstadoAsignacion(String estadoAsignacionReactivo) {
+		try {
+			Query query = em.createNamedQuery("Reactivo.findAllbyEstadoAsignacion");
+			query.setParameter("estadoAsignacionReactivo", estadoAsignacionReactivo);
+			return query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ArrayList<Reactivo>();
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Reactivo> findReactivosPorAsignar() {
+		try {
+			Query query = em.createNamedQuery("Reactivo.findReactivosPorAsignar");
+			return query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ArrayList<Reactivo>();
+		}
+	}
+
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Reactivo> 	findReactivosPorReasignar() {
+		try {
+			Query query = em.createNamedQuery("Reactivo.findReactivosPorReasignar");
+			return query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ArrayList<Reactivo>();
+		}
+	}
+
+
 }

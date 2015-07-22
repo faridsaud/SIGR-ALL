@@ -18,31 +18,37 @@
 	<ui:define name="content">
 		<h:form>
 			<p:dataTable id="tabla1" var="usuario"
-				value="#{usuarioControl.listUsuarioVerificador}" paginator="true"
+				value="#{usuarioControl.listUsuarioCalibrador}" paginator="true"
 				rows="10">
-				<p:column filterBy="#{usuario.usuarioId}" headerText="id"
+				<p:column filterBy="#{usuario.usuarioId}" headerText="Codigo"
 					footerText="contains" filterMatchMode="contains">
 					<h:outputText value="#{usuario.usuarioId}" />
 				</p:column>
-				<!--
-				<p:column filterBy="#{usuario.usuarioApellido}" headerText="Apellido"
+				<p:column filterBy="#{usuario.usuarioNombre}" headerText="Nombres"
 					footerText="contains" filterMatchMode="contains">
+					<h:outputText value="#{usuario.usuarioNombre}" />
+				</p:column>
+				<p:column filterBy="#{usuario.usuarioApellido}"
+					headerText="Apellidos" footerText="contains"
+					filterMatchMode="contains">
 					<h:outputText value="#{usuario.usuarioApellido}" />
 				</p:column>
-				<p:column filterBy="#{usuario.usuarioCedula}" headerText="Cedula"
+				<p:column filterBy="#{usuario.usuarioCedula}" headerText="CI"
 					footerText="contains" filterMatchMode="contains">
 					<h:outputText value="#{usuario.usuarioCedula}" />
 				</p:column>
-				
+				<p:column filterBy="#{usuario.usuarioCiudad}" headerText="Ciudad"
+					footerText="contains" filterMatchMode="contains">
+					<h:outputText value="#{usuario.usuarioCiudad}" />
+				</p:column>
 				<p:column>
-				 				<f:facet name="header">Asignar</f:facet>
-					<h:commandButton value="Asignar" action="#{reactivoControl.editar}">
-						<f:param name="#{reactivoControl.cmdUpdate}"
-							value="#{reactivo.reactivoId}" />
+					<f:facet name="header">Asignar</f:facet>
+					<h:commandButton value="Asignar"
+						action="#{usuarioControl.asignarReactivo()}">
+						<f:param name="#{usuarioControl.cmdAsignarReactivo}" value="#{usuario.usuarioId}" />
+						<f:param name="#{usuarioControl.cmdReactivo}" value="#{reactivoControl.reactivo.reactivoId}" />
 					</h:commandButton>
 				</p:column>
-				 -->
-	
 			</p:dataTable>
 		</h:form>
 	</ui:define>

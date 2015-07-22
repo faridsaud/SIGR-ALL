@@ -1,0 +1,7 @@
+package ec.edu.epn.modelo.dao;
+
+import ec.edu.epn.modelo.entity.Grupo;
+
+public interface GrupoDAO extends GenericDAO<Grupo,Integer> {
+
+}
