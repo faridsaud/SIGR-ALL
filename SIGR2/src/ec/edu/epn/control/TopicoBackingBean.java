@@ -8,6 +8,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import ec.edu.epn.modelo.entity.Campo;
+import ec.edu.epn.modelo.entity.Grupo;
 import ec.edu.epn.modelo.entity.Topico;
 import ec.edu.epn.modelo.jpa.JPADAOFactory;
 
@@ -80,5 +82,15 @@ public class TopicoBackingBean {
 
 	public String nuevo() {
 		return "topico_new";
+	}
+	
+	/*Lista de topicos por grupo -Creado por: Farid Saud*/
+
+	public List<Topico> getListTopicobyGrupo(String nombreGrupo) {
+		List<Grupo> listaGrupo=JPADAOFactory.getFactory().getGrupoDAO().findbyNombre(nombreGrupo);
+		return listaGrupo.get(0).getTopicos();
+	}
+
+	public void setListTopicobyGrupo(List<Campo> listCampo) {
 	}
 }

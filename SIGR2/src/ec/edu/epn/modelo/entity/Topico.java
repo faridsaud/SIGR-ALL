@@ -1,7 +1,9 @@
 package ec.edu.epn.modelo.entity;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -11,7 +13,11 @@ import java.util.List;
  */
 @Entity
 @Table(name="TOPICO")
-@NamedQuery(name="Topico.findAll", query="SELECT t FROM Topico t")
+@NamedQueries({
+	@NamedQuery(name="Topico.findAll", query="SELECT t FROM Topico t"),
+	@NamedQuery(name="Topico.findbyNombre", query="SELECT t FROM Topico t WHERE t.topicoNombre=:nombreTopico"),
+
+})
 public class Topico implements Serializable {
 	private static final long serialVersionUID = 1L;
 

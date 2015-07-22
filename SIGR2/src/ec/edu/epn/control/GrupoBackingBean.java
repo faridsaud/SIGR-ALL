@@ -8,6 +8,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import ec.edu.epn.modelo.entity.Campo;
+import ec.edu.epn.modelo.entity.Carrera;
 import ec.edu.epn.modelo.entity.Grupo;
 import ec.edu.epn.modelo.jpa.JPADAOFactory;
 
@@ -80,5 +82,14 @@ public class GrupoBackingBean {
 
 	public String nuevo() {
 		return "grupo_new";
+	}
+	/*Lista de grupos por campo -Creado por: Farid Saud*/
+
+	public List<Grupo> getListGrupobyCampo(String nombreCampo) {
+		List<Campo> listaCampo=JPADAOFactory.getFactory().getCampoDAO().findbyNombre(nombreCampo);
+		return listaCampo.get(0).getGrupos();
+	}
+
+	public void setListGrupobyCampo(List<Campo> listCampo) {
 	}
 }

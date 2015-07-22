@@ -9,6 +9,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import ec.edu.epn.modelo.entity.Campo;
+import ec.edu.epn.modelo.entity.Carrera;
 import ec.edu.epn.modelo.jpa.JPADAOFactory;
 
 
@@ -80,5 +81,13 @@ public class CampoBackingBean {
 
 	public String nuevo() {
 		return "campo_new";
+	}
+	/*Lista de campos por carrera -Creado por: Farid Saud*/
+	public List<Campo> getListCampobyCarrera(String nombreCarrera) {
+		List<Carrera> listaCarrera=JPADAOFactory.getFactory().getCarreraDAO().findbyNombre(nombreCarrera);
+		return listaCarrera.get(0).getCampos();
+	}
+
+	public void setListCampobyCarrera(List<Campo> listCampo) {
 	}
 }
