@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
+	<ui:define name="topContent">
+		<h:form>
+			<p:menubar>
+				<p:menuitem value="#{msg['menu.Home']}" url="#" />
+				<p:submenu label="#{msg['menu.Reactivos']}">
+					<p:menuitem value="#{msg['menu.ReactivosSimple']}" url="#" />
+					<p:menuitem value="#{msg['menu.ReactivosOrdenamiento']}" url="#" />
+					<p:menuitem value="#{msg['menu.ReactivosCompletamiento']}"
+						url="/Vista/ReactivoCompletamiento/homeElaborador.jsf" />
+					<p:menuitem value="#{msg['menu.ReactivosEleccionElementos']}"
+						url="#" />
+					<p:menuitem value="#{msg['menu.ReactivosRelacionColumnas']}"
+						url="#" />
+					<p:menuitem value="#{msg['menu.ReactivosContexto']}" url="#" />
+				</p:submenu>
+				<p:menuitem value="#{msg['menu.Ayuda']}" url="#" />
+				<p:menuitem value="#{msg['menu.Salir']}" url="#" />
+			</p:menubar>
+		</h:form>
+	</ui:define>
+	
+	<ui:define name="content">
+		<h:form>
+			<p:growl id="msgs" showDetail="true" />
+ 
+		    <p:panel header="Modificacion de Items con Formato de Completamiento" style="margin-bottom:10px;">
+		        
+		        <h:panelGrid columns="2" cellpadding="5">
+		        	
+		        	<p:outputLabel for="carrera" value="Carrera: " />
+		        	<p:inplace id="carrera" label="Ingenieria" editor="true">
+			            <h:selectOneMenu>
+			            	<p:ajax listener="#{reactivoCompletamientoControl.onCarreraChange()}" update="campo" />
+			            	<f:selectItem itemLabel="Seleccione una Carrera" itemValue="" noSelectionOption="true" />
+			                <f:selectItems value="#{reactivoCompletamientoControl.listaCarreras}" var="carrera"  itemLabel="#{carrera.carreraNombre}" itemValue="#{carrera.carreraNombre}"/>
+			            </h:selectOneMenu>
+			        </p:inplace>
+		        			        	
+		        	<p:outputLabel for="campo" value="Campo: " />
+		        	<p:inplace id="campo" label="Fisica" editor="true">
+			        	<h:selectOneMenu >
+		                	<p:ajax listener="#{reactivoCompletamientoControl.onCampoChange()}" update="grupo" />
+		                	<f:selectItem itemLabel="Seleccione un Campo" itemValue="" noSelectionOption="true" />
+		                	<f:selectItems value="#{reactivoCompletamientoControl.listaCampos}" var="campo"  itemLabel="#{campo.campoNombre}" itemValue="#{campo.campoNombre}" />
+	            		</h:selectOneMenu>
+	            	</p:inplace>
+		        	
+		        	<p:outputLabel for="grupo" value="Grupo Tematico: " />
+			        <p:inplace id="grupo" label="MRUV" editor="true">
+			        	<h:selectOneMenu >
+		                	<p:ajax listener="#{reactivoCompletamientoControl.onGrupoChange()}" update="topico" />
+		                	<f:selectItem itemLabel="Seleccione un Grupo" itemValue="" noSelectionOption="true" />
+		                	<f:selectItems value="#{reactivoCompletamientoControl.listaGrupos}" var="grupo"  itemLabel="#{grupo.grupoNombre}" itemValue="#{grupo.grupoNombre}" />
+	            		</h:selectOneMenu>
+	            	</p:inplace>
+            		
+            		<p:outputLabel for="topico" value="Topico: " />
+		        	<p:inplace id="topico" label="Movimiento parabolico" editor="true">
+			        	<h:selectOneMenu >
+		                	<f:selectItem itemLabel="Seleccione un Topico" itemValue="" noSelectionOption="true" />
+		                	<f:selectItems value="#{reactivoCompletamientoControl.listaTopicos}" var="topico"  itemLabel="#{topico.topicoNombre}" itemValue="#{topico.topicoNombre}" />
+	            		</h:selectOneMenu>
+	            	</p:inplace>
+            		
+            		<p:outputLabel for="taxonomia" value="Taxonomia de Bloom: " />
+		        	<p:inplace id="taxonomia" label="Nivel 1" editor="true">
+			        	<h:selectOneMenu >
+		                	<f:selectItem itemLabel="Selecccione una Taxonomia" itemValue="" noSelectionOption="true" />
+		                	<f:selectItems value = "#{reactivo.taxonomiaBloom.taxonomiaNombre}" />
+	            		</h:selectOneMenu>
+	            	</p:inplace>
+            				        	
+		        </h:panelGrid>
+		        
+		        <h3>Instruccion</h3>
+	    		<p:inputTextarea rows="6" cols="50" autoResize="true"/>
+	    				
+	    		<h3>Planteamiento</h3>
+	    		<p:inputTextarea rows="6" cols="50" autoResize="true"/>
+		        
+		        <p:separator></p:separator>
+		        
+		        <h:panelGrid columns = "5" cellpadding="5">
+		        
+		        	<p:outputLabel for = "espacio1" value = "Opciones de respuesta: "/>
+		        	<p:outputLabel id = "espacio1" for = "espacio2" value = " "/>
+		        	<p:outputLabel id = "espacio2" for = "radios" value = " "/>
+		        	<p:outputLabel id = "radios" for = "argumentacion" value = "Respuesta Correcta: "/>
+		        	<p:outputLabel id = "argumentacion" value="Argumemtacion: "/>
+		        	
+		        	<p:outputLabel for = "textA" value = "A): "/>
+		        	<p:inputTextarea id="textA" for = "iconA" rows="3" cols="30" />
+		        	<p:commandButton id= "iconA" for="radioA" actionListener = "#{reactivoCompletamientoControl.cargarImagen()}" icon="ui-icon-disk" title="Cargar Imagen" />
+		        	<p:selectOneRadio id="radioA" for= "argumentacionA" value="#{reactivo.reactivoRespuestaCorrecta}">
+            			<f:selectItem itemLabel="SI" itemValue="1"/>
+            			<f:selectItem itemLabel="NO" itemValue="0"/>
+            		</p:selectOneRadio>
+            		<p:inputTextarea id="argumentacionA" rows="3" cols="30" />
+            		
+            		<p:outputLabel for = "textB" value = "B): "/>
+		        	<p:inputTextarea id="textB" for = "iconB" rows="3" cols="30" />
+		        	<p:commandButton id= "iconB" for="radioB" actionListener = "#{reactivoCompletamientoControl.cargarImagen()}" icon="ui-icon-disk" title="Cargar Imagen" />
+		        	<p:selectOneRadio id="radioB" for= "argumentacionB" value="#{reactivo.reactivoRespuestaCorrecta}">
+            			<f:selectItem itemLabel="SI" itemValue="1"/>
+            			<f:selectItem itemLabel="NO" itemValue="0"/>
+            		</p:selectOneRadio>
+            		<p:inputTextarea id="argumentacionB" rows="3" cols="30" />
+            		
+            		<p:outputLabel for = "textC" value = "C): "/>
+		        	<p:inputTextarea id="textC" for = "iconC" rows="3" cols="30" />
+		        	<p:commandButton id= "iconC" for="radioC" actionListener = "#{reactivoCompletamientoControl.cargarImagen()}" icon="ui-icon-disk" title="Cargar Imagen" />
+		        	<p:selectOneRadio id="radioC" for= "argumentacionC" value="#{reactivo.reactivoRespuestaCorrecta}">
+            			<f:selectItem itemLabel="SI" itemValue="1"/>
+            			<f:selectItem itemLabel="NO" itemValue="0"/>
+            		</p:selectOneRadio>
+            		<p:inputTextarea id="argumentacionC" rows="3" cols="30" />
+            		
+            		<p:outputLabel for = "textD" value = "D): "/>
+		        	<p:inputTextarea id="textD" for = "iconD" rows="3" cols="30" />
+		        	<p:commandButton id= "iconD" for="radioD" actionListener = "#{reactivoCompletamientoControl.cargarImagen()}" icon="ui-icon-disk" title="Cargar Imagen" />
+		        	<p:selectOneRadio id="radioD" for= "argumentacionD" value="#{reactivo.reactivoRespuestaCorrecta}">
+            			<f:selectItem itemLabel="SI" itemValue="1"/>
+            			<f:selectItem itemLabel="NO" itemValue="0"/>
+            		</p:selectOneRadio>
+            		<p:inputTextarea id="argumentacionD" rows="3" cols="30" />
+            	
+            	</h:panelGrid>
+            	
+            	<p:commandButton value="Preview" id="preview" actionListener="#{reactivoCompletamientoControl.accionPreview}" icon="ui-icon-document" />
+            	<p:commandButton value="Guardar" id="guardar" actionListener="#{reactivoCompletamientoControl.accionGuardar}" icon="ui-icon-disk" />
+            	<p:commandButton value="Cancelar" id="cancelar" actionListener="#{reactivoCompletamientoControl.accionCancelar}" icon="ui-icon-cancel" />
+            	    
+		    </p:panel>
+		    
+		    
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
