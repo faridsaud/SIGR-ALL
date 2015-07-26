@@ -12,33 +12,31 @@
 		<h:form>
 			<p:menubar>
 				<p:menuitem value="#{msg['menu.Home']}" url="#" />
-				<p:submenu label="#{msg['menu.Usuarios']}">
-					<p:menuitem value="#{msg['menu.UsuariosAdministracion']}" url="#" />
-					<p:menuitem value="#{msg['menu.UsuariosAdministracionRoles']}" url="#" />
-					<p:menuitem value="#{msg['menu.UsuariosAsignacionReactivos']}" url="#" />
-					<p:menuitem value="#{msg['menu.UsuariosReasignacionReactivos']}" url="#" />
-					<p:menuitem value="#{msg['menu.UsuariosAdministracionRoles']}" url="#" />
-					<p:menuitem value="#{msg['menu.UsuariosAsignacionPermisos']}" url="#" />
-				</p:submenu>
-				<p:menuitem value="#{msg['menu.Prueba']}" url="#" />
-				<p:submenu label="#{msg['menu.UnidadAcademica']}">
-					<p:menuitem value="#{msg['menu.UnidadAcademicaCarrera']}" url="#" />
-					<p:menuitem value="#{msg['menu.UnidadAcademicaCampo']}" url="#" />
-					<p:menuitem value="#{msg['menu.UnidadAcademicaGrupo']}" url="#" />
-					<p:menuitem value="#{msg['menu.UnidadAcademicaTopico']}" url="#" />
+				<p:submenu label="#{msg['menu.Reactivos']}">
+					<p:menuitem value="#{msg['menu.ReactivosSimple']}" url="#" />
+					<p:menuitem value="#{msg['menu.ReactivosOrdenamiento']}" url="#" />
+					<p:menuitem value="#{msg['menu.ReactivosCompletamiento']}"
+						url="/Vista/ReactivoCompletamiento/homeValidador.jsf" />
+					<p:menuitem value="#{msg['menu.ReactivosEleccionElementos']}"
+						url="#" />
+					<p:menuitem value="#{msg['menu.ReactivosRelacionColumnas']}"
+						url="#" />
+					<p:menuitem value="#{msg['menu.ReactivosContexto']}" url="#" />
 				</p:submenu>
 				<p:menuitem value="#{msg['menu.Ayuda']}" url="#" />
 				<p:menuitem value="#{msg['menu.Salir']}" url="#" />
 			</p:menubar>
-		
 		</h:form>
 	</ui:define>
 	<ui:define name="content">
+		
+			<h2>
+			<b>#{msg['reactivoCompletamiento.nombre']}</b>
+			</h2>
 		<h:form>
-
 			<p:dataTable id="tabla1" var="reactivo"
-				value="#{reactivoControl.listReactivoPorReasignar}" paginator="true"
-				rows="10">
+				value="#{reactivoCompletamientoControl.listReactivoHomeValidadorReactivoCompletamiento}"
+				paginator="true" rows="10">
 				<p:column filterBy="#{reactivo.reactivoId}" headerText="Id"
 					footerText="contains" filterMatchMode="contains">
 					<h:outputText value="#{reactivo.reactivoId}" />
@@ -47,10 +45,6 @@
 					headerText="Instruccion" footerText="contains"
 					filterMatchMode="contains">
 					<h:outputText value="#{reactivo.reactivoInstruccion}" />
-				</p:column>
-				<p:column filterBy="#{reactivo.reactivoEstado}" headerText="Estado"
-					footerText="contains" filterMatchMode="contains">
-					<h:outputText value="#{reactivo.reactivoEstado}" />
 				</p:column>
 				<p:column filterBy="#{reactivo.taxonomiabloom.taxonomiaNombre}"
 					headerText="Taxonomia" footerText="contains"
@@ -62,14 +56,21 @@
 					filterMatchMode="contains">
 					<h:outputText value="#{reactivo.reactivoElaboradoPor}" />
 				</p:column>
+				<p:column filterBy="#{reactivo.reactivoFechaModificacion}"
+					headerText="Ultima Fecha Modificacion" footerText="contains"
+					filterMatchMode="contains">
+					<h:outputText value="#{reactivo.reactivoFechaModificacion}" />
+				</p:column>
+				<p:column filterBy="#{reactivo.reactivoEstado}" headerText="Estado"
+					footerText="contains" filterMatchMode="contains">
+					<h:outputText value="#{reactivo.reactivoEstado}" />
+				</p:column>
+
 				<p:column>
-					<f:facet name="header">Reasignar</f:facet>
-					<p:commandButton value="Reasignar"
-						action="#{reactivoControl.asignar()}">
-						<f:param name="#{reactivoControl.cmdAsignar}"
+					<f:facet name="header">Validar</f:facet>
+					<p:commandButton value="Validar" action="homeElaborador">
+						<f:param name="#{reactivoCompletamientoControl.cmdValidar}"
 							value="#{reactivo.reactivoId}" />
-
-
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>

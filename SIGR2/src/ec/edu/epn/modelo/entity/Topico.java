@@ -1,9 +1,7 @@
 package ec.edu.epn.modelo.entity;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
 import java.util.List;
 
 

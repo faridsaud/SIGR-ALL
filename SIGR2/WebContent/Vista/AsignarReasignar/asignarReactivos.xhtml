@@ -10,13 +10,32 @@
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
 	<ui:define name="topContent">
 		<h:form>
-			<p:growl id="messages" />
 			<p:menubar>
+				<p:menuitem value="#{msg['menu.Home']}" url="#" />
+				<p:submenu label="#{msg['menu.Usuarios']}">
+					<p:menuitem value="#{msg['menu.UsuariosAdministracion']}" url="#" />
+					<p:menuitem value="#{msg['menu.UsuariosAdministracionRoles']}" url="#" />
+					<p:menuitem value="#{msg['menu.UsuariosAsignacionReactivos']}" url="#" />
+					<p:menuitem value="#{msg['menu.UsuariosReasignacionReactivos']}" url="#" />
+					<p:menuitem value="#{msg['menu.UsuariosAdministracionRoles']}" url="#" />
+					<p:menuitem value="#{msg['menu.UsuariosAsignacionPermisos']}" url="#" />
+				</p:submenu>
+				<p:menuitem value="#{msg['menu.Prueba']}" url="#" />
+				<p:submenu label="#{msg['menu.UnidadAcademica']}">
+					<p:menuitem value="#{msg['menu.UnidadAcademicaCarrera']}" url="#" />
+					<p:menuitem value="#{msg['menu.UnidadAcademicaCampo']}" url="#" />
+					<p:menuitem value="#{msg['menu.UnidadAcademicaGrupo']}" url="#" />
+					<p:menuitem value="#{msg['menu.UnidadAcademicaTopico']}" url="#" />
+				</p:submenu>
+				<p:menuitem value="#{msg['menu.Ayuda']}" url="#" />
+				<p:menuitem value="#{msg['menu.Salir']}" url="#" />
 			</p:menubar>
+		
 		</h:form>
 	</ui:define>
 	<ui:define name="content">
 		<h:form>
+		
 			<p:panel header="Seleccionars filtros" style="margin-bottom:10px;">
 				<p:panelGrid columns="2">
 					<p:outputLabel for="carrera" value="#{msg['asignar.carrera']}" />
@@ -26,8 +45,9 @@
 							update="campo" />
 						<f:selectItem itemLabel="Select Carrera" itemValue=""
 							noSelectionOption="true" />
-						<f:selectItems value="#{asignacionFiltradoControl.listaCarreras}" var="carr" 
-    itemLabel="#{carr.carreraNombre}" itemValue="#{carr.carreraNombre}" />
+						<f:selectItems value="#{asignacionFiltradoControl.listaCarreras}"
+							var="carr" itemLabel="#{carr.carreraNombre}"
+							itemValue="#{carr.carreraNombre}" />
 					</p:selectOneMenu>
 
 					<p:outputLabel for="campo" value="#{msg['asignar.campo']}" />
@@ -37,8 +57,9 @@
 							update="grupo" />
 						<f:selectItem itemLabel="Select Campo" itemValue=""
 							noSelectionOption="true" />
-						<f:selectItems value="#{asignacionFiltradoControl.listaCampos}" var="camp" 
-    itemLabel="#{camp.campoNombre}" itemValue="#{camp.campoNombre}"  />
+						<f:selectItems value="#{asignacionFiltradoControl.listaCampos}"
+							var="camp" itemLabel="#{camp.campoNombre}"
+							itemValue="#{camp.campoNombre}" />
 					</p:selectOneMenu>
 
 					<p:outputLabel for="grupo" value="#{msg['asignar.grupo']}" />
@@ -48,27 +69,30 @@
 							update="topico" />
 						<f:selectItem itemLabel="Select Grupo" itemValue=""
 							noSelectionOption="true" />
-						<f:selectItems value="#{asignacionFiltradoControl.listaGrupos}" var="grup" 
-    itemLabel="#{grup.grupoNombre}" itemValue="#{grup.grupoNombre}" />
+						<f:selectItems value="#{asignacionFiltradoControl.listaGrupos}"
+							var="grup" itemLabel="#{grup.grupoNombre}"
+							itemValue="#{grup.grupoNombre}" />
 					</p:selectOneMenu>
 
 					<p:outputLabel for="topico" value="#{msg['asignar.topico']}" />
 					<p:selectOneMenu id="topico" value="#{reactivoControl.topico}"
 						style="width:150px">
-						<p:ajax listener="#{reactivoControl.changeListAuxiliarReactivoOnTopicoChange()}"
+						<p:ajax
+							listener="#{reactivoControl.changeListAuxiliarReactivoOnTopicoChange()}"
 							update="tabla1" />
 						<f:selectItem itemLabel="Select Topico" itemValue=""
 							noSelectionOption="true" />
-						<f:selectItems value="#{asignacionFiltradoControl.listaTopicos}" var="topi" 
-    itemLabel="#{topi.topicoNombre}" itemValue="#{topi.topicoNombre}"  />
+						<f:selectItems value="#{asignacionFiltradoControl.listaTopicos}"
+							var="topi" itemLabel="#{topi.topicoNombre}"
+							itemValue="#{topi.topicoNombre}" />
 					</p:selectOneMenu>
 				</p:panelGrid>
 				<p:separator />
 
 			</p:panel>
 			<p:dataTable id="tabla1" var="reactivo"
-				value="#{reactivoControl.listaAuxiliarReactivosPorAsignar}" paginator="true"
-				rows="10">
+				value="#{reactivoControl.listaAuxiliarReactivosPorAsignar}"
+				paginator="true" rows="10">
 				<p:column filterBy="#{reactivo.reactivoId}" headerText="Id"
 					footerText="contains" filterMatchMode="contains">
 					<h:outputText value="#{reactivo.reactivoId}" />

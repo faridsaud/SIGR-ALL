@@ -10,15 +10,38 @@
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
 	<ui:define name="topContent">
 		<h:form>
-			<p:growl id="messages" />
 			<p:menubar>
+				<p:menuitem value="#{msg['menu.Home']}" url="#" />
+				<p:submenu label="#{msg['menu.Reactivos']}">
+					<p:menuitem value="#{msg['menu.ReactivosSimple']}" url="#" />
+					<p:menuitem value="#{msg['menu.ReactivosOrdenamiento']}" url="#" />
+					<p:menuitem value="#{msg['menu.ReactivosCompletamiento']}"
+						url="/Vista/ReactivoCompletamiento/homeElaborador.jsf" />
+					<p:menuitem value="#{msg['menu.ReactivosEleccionElementos']}"
+						url="#" />
+					<p:menuitem value="#{msg['menu.ReactivosRelacionColumnas']}"
+						url="#" />
+					<p:menuitem value="#{msg['menu.ReactivosContexto']}" url="#" />
+				</p:submenu>
+				<p:menuitem value="#{msg['menu.Ayuda']}" url="#" />
+				<p:menuitem value="#{msg['menu.Salir']}" url="#" />
 			</p:menubar>
 		</h:form>
 	</ui:define>
 	<ui:define name="content">
+		
+			<h2>
+			<b>#{msg['reactivoCompletamiento.nombre']}</b>
+			</h2>
 		<h:form>
+
+			<p:commandLink id="nuevoReactivoCompletamiento" style="float: right"
+				actionListener="#{reactivoCompletamientoControl.nuevo()}">
+				<h:outputText value="#{msg['reactivoCompletamiento.agregar']}" />
+			</p:commandLink>
+			
 			<p:dataTable id="tabla1" var="reactivo"
-				value="#{reactivoCompletamientoControl.getListReactivoHomeElaboradorReactivoCompletamiento()}"
+				value="#{reactivoCompletamientoControl.listReactivoHomeElaboradorReactivoCompletamiento}"
 				paginator="true" rows="10">
 				<p:column filterBy="#{reactivo.reactivoId}" headerText="Id"
 					footerText="contains" filterMatchMode="contains">
@@ -33,13 +56,13 @@
 					headerText="Taxonomia" footerText="contains"
 					filterMatchMode="contains">
 					<h:outputText value="#{reactivo.taxonomiabloom.taxonomiaNombre}" />
- 				</p:column>
- 				<p:column filterBy="#{reactivo.reactivoElaboradoPor}"
+				</p:column>
+				<p:column filterBy="#{reactivo.reactivoElaboradoPor}"
 					headerText="Elaborado Por" footerText="contains"
 					filterMatchMode="contains">
 					<h:outputText value="#{reactivo.reactivoElaboradoPor}" />
 				</p:column>
- 				<p:column filterBy="#{reactivo.reactivoFechaModificacion}"
+				<p:column filterBy="#{reactivo.reactivoFechaModificacion}"
 					headerText="Ultima Fecha Modificacion" footerText="contains"
 					filterMatchMode="contains">
 					<h:outputText value="#{reactivo.reactivoFechaModificacion}" />
@@ -48,12 +71,11 @@
 					footerText="contains" filterMatchMode="contains">
 					<h:outputText value="#{reactivo.reactivoEstado}" />
 				</p:column>
-				
+
 				<p:column>
-					<f:facet name="header">Asignar</f:facet>
-					<p:commandButton value="Asignar"
-						action="#{reactivoControl.asignar()}">
-						<f:param name="#{reactivoControl.cmdAsignar}"
+					<f:facet name="header">Modificar</f:facet>
+					<p:commandButton value="Modificar" action="homeElaborador">
+						<f:param name="#{reactivoCompletamientoControl.cmdModificar}"
 							value="#{reactivo.reactivoId}" />
 					</p:commandButton>
 				</p:column>

@@ -11,10 +11,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="USUARIO")
-@NamedQueries({
-	@NamedQuery(name="Usuariorol.findAll", query="SELECT u FROM Usuariorol u"),
-	@NamedQuery(name="Usuariorol.findAllbyRol", query="SELECT u FROM Usuariorol u WHERE u.rol.rolNombre = :rolnombre")
-})
+@NamedQuery(name="Usuario.findAll", query="SELECT u FROM Usuario u")
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 

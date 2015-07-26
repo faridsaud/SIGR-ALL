@@ -79,6 +79,15 @@ public class ReactivoCompletamientoBackingBean {
 		return "cmdRemove";
 	}
 
+	public String getCmdModificar() {
+		return "cmdModificar";
+	}
+	public String getCmdValidar() {
+		return "cmdModificar";
+	}
+	public String getCmdCalibrar() {
+		return "cmdModificar";
+	}
 	public String nuevo() {
 		return "reactivo_new";
 	}
@@ -89,6 +98,22 @@ public class ReactivoCompletamientoBackingBean {
 		return JPADAOFactory.getFactory().getReactivoDAO().findByTipoAndByEstado("Elaboracion", "Completamiento");
 	}
 
-	public void getListListReactivoHomeElaboradorReactivoCompletamiento(List<Reactivo> listReactivo) {
-	}	
+	public void setListReactivoHomeElaboradorReactivoCompletamiento(List<Reactivo> listReactivo) {
+	}
+	
+	public List<Reactivo> getListReactivoHomeValidadorReactivoCompletamiento() {
+
+		return JPADAOFactory.getFactory().getReactivoDAO().findByTipoAndByEstado("Validacion", "Completamiento");
+	}
+
+	public void setListReactivoHomeValidadorReactivoCompletamiento(List<Reactivo> listReactivo) {
+	}
+	
+	public List<Reactivo> getListReactivoHomeCalibradorReactivoCompletamiento() {
+
+		return JPADAOFactory.getFactory().getReactivoDAO().findByTipoAndByEstado("Calibracion", "Completamiento");
+	}
+
+	public void setListReactivoHomeCalibradorReactivoCompletamiento(List<Reactivo> listReactivo) {
+	}
 }

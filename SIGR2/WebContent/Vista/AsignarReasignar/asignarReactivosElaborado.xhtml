@@ -10,13 +10,33 @@
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
 	<ui:define name="topContent">
 		<h:form>
-			<p:growl id="messages" />
 			<p:menubar>
+				<p:menuitem value="#{msg['menu.Home']}" url="#" />
+				<p:submenu label="#{msg['menu.Usuarios']}">
+					<p:menuitem value="#{msg['menu.UsuariosAdministracion']}" url="#" />
+					<p:menuitem value="#{msg['menu.UsuariosAdministracionRoles']}" url="#" />
+					<p:menuitem value="#{msg['menu.UsuariosAsignacionReactivos']}" url="#" />
+					<p:menuitem value="#{msg['menu.UsuariosReasignacionReactivos']}" url="#" />
+					<p:menuitem value="#{msg['menu.UsuariosAdministracionRoles']}" url="#" />
+					<p:menuitem value="#{msg['menu.UsuariosAsignacionPermisos']}" url="#" />
+				</p:submenu>
+				<p:menuitem value="#{msg['menu.Prueba']}" url="#" />
+				<p:submenu label="#{msg['menu.UnidadAcademica']}">
+					<p:menuitem value="#{msg['menu.UnidadAcademicaCarrera']}" url="#" />
+					<p:menuitem value="#{msg['menu.UnidadAcademicaCampo']}" url="#" />
+					<p:menuitem value="#{msg['menu.UnidadAcademicaGrupo']}" url="#" />
+					<p:menuitem value="#{msg['menu.UnidadAcademicaTopico']}" url="#" />
+				</p:submenu>
+				<p:menuitem value="#{msg['menu.Ayuda']}" url="#" />
+				<p:menuitem value="#{msg['menu.Salir']}" url="#" />
 			</p:menubar>
+		
 		</h:form>
 	</ui:define>
 	<ui:define name="content">
 		<h:form>
+
+
 			<p:dataTable id="tabla1" var="usuario"
 				value="#{usuarioControl.listUsuarioValidador}" paginator="true"
 				rows="10">
@@ -45,8 +65,10 @@
 					<f:facet name="header">Asignar</f:facet>
 					<h:commandButton value="Asignar"
 						action="#{usuarioControl.asignarReactivo()}">
-						<f:param name="#{usuarioControl.cmdAsignarReactivo}" value="#{usuario.usuarioId}" />
-						<f:param name="#{usuarioControl.cmdReactivo}" value="#{reactivoControl.reactivo.reactivoId}" />
+						<f:param name="#{usuarioControl.cmdAsignarReactivo}"
+							value="#{usuario.usuarioId}" />
+						<f:param name="#{usuarioControl.cmdReactivo}"
+							value="#{reactivoControl.reactivo.reactivoId}" />
 					</h:commandButton>
 				</p:column>
 			</p:dataTable>
