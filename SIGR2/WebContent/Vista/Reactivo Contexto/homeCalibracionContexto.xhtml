@@ -10,19 +10,38 @@
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
 	<ui:define name="topContent">
 		<h:form>
-			<p:growl id="messages" />
 			<p:menubar>
+				<p:menuitem value="#{msg['menu.Home']}" url="#" incon = "ui-icon-home" />
+				<p:submenu label="#{msg['menu.Reactivos']}" icon = "ui-icon-bookmark">
+					<p:menuitem value="#{msg['menu.ReactivosSimple']}" url="#" />
+					<p:menuitem value="#{msg['menu.ReactivosOrdenamiento']}" url="#" />
+					<p:menuitem value="#{msg['menu.ReactivosCompletamiento']}" 	url="#" />
+					<p:menuitem value="#{msg['menu.ReactivosEleccionElementos']}" url="#" />
+					<p:menuitem value="#{msg['menu.ReactivosRelacionColumnas']}" url="#" />
+					<p:menuitem value="#{msg['menu.ReactivosContexto']}" url="#" />
+				</p:submenu>
+				<p:menuitem value="#{msg['menu.Ayuda']}" url="#" icon ="ui-icon-help"/>
+				<p:menuitem value="#{msg['menu.Salir']}" url="#" icon = "ui-icon-circle-close"/>
 			</p:menubar>
 		</h:form>
 	</ui:define>
 	<ui:define name="content">
-		<h:form>
-			<p:panel header="Seleccionars filtros" style="margin-bottom:10px;">
-				
-				
-			</p:panel>
-			
-		</h:form>
+		<h1>Por llenar...</h1>
+		<h2>Observaciones</h2>
+		<p:inputTextarea rows="5" cols="30" counter="display" maxlength="10" counterTemplate="{0} characters remaining." autoResize="false" />
+    	<h:outputText id="display" />
+    	<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+        <h:outputText value="Reactivo Calibrado: " />
+        <p:selectBooleanCheckbox value="#">
+            <p:ajax update="msg" listener="#{msg['reactivo.Calibrado']}" />
+        </p:selectBooleanCheckbox>        
+    </h:panelGrid>
+    <p:button outcome="Guardar" value="#" icon="ui-icon-save">
+    <f:param name="guardarContexto" value="20" />
+    <p:button outcome="Cancelar" value="#" icon="">
+    <f:param name="cancelarContexto" value="20" />
+</p:button>
+</p:button>
 	</ui:define>
 </ui:composition>
 </html>
