@@ -10,6 +10,26 @@
 <ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
 	<ui:define name="topContent">
 		<h:form>
+			<p:menubar>
+				<p:menuitem value="#{msg['menu.Home']}" url="#" />
+				<p:submenu label="#{msg['menu.Reactivos']}">
+					<p:menuitem value="#{msg['menu.ReactivosSimple']}" url="#" />
+					<p:menuitem value="#{msg['menu.ReactivosOrdenamiento']}" url="#" />
+					<p:menuitem value="#{msg['menu.ReactivosCompletamiento']}"
+						url="/Vista/ReactivoCompletamiento/homeElaborador.jsf" />
+					<p:menuitem value="#{msg['menu.ReactivosEleccionElementos']}"
+						url="#" />
+					<p:menuitem value="#{msg['menu.ReactivosRelacionColumnas']}"
+						url="#" />
+					<p:menuitem value="#{msg['menu.ReactivosContexto']}" url="#" />
+				</p:submenu>
+				<p:menuitem value="#{msg['menu.Ayuda']}" url="#" />
+				<p:menuitem value="#{msg['menu.Salir']}" url="#" />
+			</p:menubar>
+		</h:form>
+	</ui:define>
+	<ui:define name="content">
+		<h:form>
 			<p:growl id="msgs" showDetail="true" />
  
 		    <p:panel header="Creacion de Items con Formato de Completamiento" style="margin-bottom:10px;">
