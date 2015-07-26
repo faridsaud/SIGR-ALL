@@ -14,7 +14,6 @@ import java.util.List;
 @NamedQueries({
 	@NamedQuery(name="Carrera.findAll", query="SELECT c FROM Carrera c"),
 	@NamedQuery(name="Carrera.findbyNombre", query="SELECT c FROM Carrera c WHERE c.carreraNombre=:nombreCarrera"),
-
 })
 public class Carrera implements Serializable {
 	private static final long serialVersionUID = 1L;

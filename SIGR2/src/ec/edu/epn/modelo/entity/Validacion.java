@@ -31,6 +31,10 @@ public class Validacion implements Serializable {
 	@Column(name="VALIDACION_FECHA")
 	private Date validacionFecha;
 
+	//bi-directional many-to-one association to Lineamiento
+	@OneToMany(mappedBy="validacion")
+	private List<Lineamiento> lineamientos;
+
 	//bi-directional many-to-one association to Reactivo
 	@OneToMany(mappedBy="validacion")
 	private List<Reactivo> reactivos;
@@ -39,10 +43,6 @@ public class Validacion implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="USUARIO_ID")
 	private Usuario usuario;
-
-	//bi-directional many-to-one association to Validacionlineamiento
-	@OneToMany(mappedBy="validacion")
-	private List<Validacionlineamiento> validacionlineamientos;
 
 	public Validacion() {
 	}
@@ -79,6 +79,28 @@ public class Validacion implements Serializable {
 		this.validacionFecha = validacionFecha;
 	}
 
+	public List<Lineamiento> getLineamientos() {
+		return this.lineamientos;
+	}
+
+	public void setLineamientos(List<Lineamiento> lineamientos) {
+		this.lineamientos = lineamientos;
+	}
+
+	public Lineamiento addLineamiento(Lineamiento lineamiento) {
+		getLineamientos().add(lineamiento);
+		lineamiento.setValidacion(this);
+
+		return lineamiento;
+	}
+
+	public Lineamiento removeLineamiento(Lineamiento lineamiento) {
+		getLineamientos().remove(lineamiento);
+		lineamiento.setValidacion(null);
+
+		return lineamiento;
+	}
+
 	public List<Reactivo> getReactivos() {
 		return this.reactivos;
 	}
@@ -107,28 +129,6 @@ public class Validacion implements Serializable {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
-	}
-
-	public List<Validacionlineamiento> getValidacionlineamientos() {
-		return this.validacionlineamientos;
-	}
-
-	public void setValidacionlineamientos(List<Validacionlineamiento> validacionlineamientos) {
-		this.validacionlineamientos = validacionlineamientos;
-	}
-
-	public Validacionlineamiento addValidacionlineamiento(Validacionlineamiento validacionlineamiento) {
-		getValidacionlineamientos().add(validacionlineamiento);
-		validacionlineamiento.setValidacion(this);
-
-		return validacionlineamiento;
-	}
-
-	public Validacionlineamiento removeValidacionlineamiento(Validacionlineamiento validacionlineamiento) {
-		getValidacionlineamientos().remove(validacionlineamiento);
-		validacionlineamiento.setValidacion(null);
-
-		return validacionlineamiento;
 	}
 
 }

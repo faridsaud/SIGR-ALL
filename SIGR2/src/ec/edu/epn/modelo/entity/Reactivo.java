@@ -101,9 +101,9 @@ public class Reactivo implements Serializable {
 	@JoinColumn(name="VALIDACION_ID")
 	private Validacion validacion;
 
-	//bi-directional many-to-one association to Reactivorespuesta
+	//bi-directional many-to-one association to Respuesta
 	@OneToMany(mappedBy="reactivo")
-	private List<Reactivorespuesta> reactivorespuestas;
+	private List<Respuesta> respuestas;
 
 	public Reactivo() {
 	}
@@ -288,26 +288,26 @@ public class Reactivo implements Serializable {
 		this.validacion = validacion;
 	}
 
-	public List<Reactivorespuesta> getReactivorespuestas() {
-		return this.reactivorespuestas;
+	public List<Respuesta> getRespuestas() {
+		return this.respuestas;
 	}
 
-	public void setReactivorespuestas(List<Reactivorespuesta> reactivorespuestas) {
-		this.reactivorespuestas = reactivorespuestas;
+	public void setRespuestas(List<Respuesta> respuestas) {
+		this.respuestas = respuestas;
 	}
 
-	public Reactivorespuesta addReactivorespuesta(Reactivorespuesta reactivorespuesta) {
-		getReactivorespuestas().add(reactivorespuesta);
-		reactivorespuesta.setReactivo(this);
+	public Respuesta addRespuesta(Respuesta respuesta) {
+		getRespuestas().add(respuesta);
+		respuesta.setReactivo(this);
 
-		return reactivorespuesta;
+		return respuesta;
 	}
 
-	public Reactivorespuesta removeReactivorespuesta(Reactivorespuesta reactivorespuesta) {
-		getReactivorespuestas().remove(reactivorespuesta);
-		reactivorespuesta.setReactivo(null);
+	public Respuesta removeRespuesta(Respuesta respuesta) {
+		getRespuestas().remove(respuesta);
+		respuesta.setReactivo(null);
 
-		return reactivorespuesta;
+		return respuesta;
 	}
 
 }

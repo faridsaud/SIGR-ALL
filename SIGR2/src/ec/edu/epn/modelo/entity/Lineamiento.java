@@ -2,7 +2,6 @@ package ec.edu.epn.modelo.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
@@ -29,9 +28,10 @@ public class Lineamiento implements Serializable {
 	@Column(name="LINEAMIENTO_ESTADO")
 	private int lineamientoEstado;
 
-	//bi-directional many-to-one association to Validacionlineamiento
-	@OneToMany(mappedBy="lineamiento")
-	private List<Validacionlineamiento> validacionlineamientos;
+	//bi-directional many-to-one association to Validacion
+	@ManyToOne
+	@JoinColumn(name="VALIDACION_ID")
+	private Validacion validacion;
 
 	public Lineamiento() {
 	}
@@ -68,26 +68,12 @@ public class Lineamiento implements Serializable {
 		this.lineamientoEstado = lineamientoEstado;
 	}
 
-	public List<Validacionlineamiento> getValidacionlineamientos() {
-		return this.validacionlineamientos;
+	public Validacion getValidacion() {
+		return this.validacion;
 	}
 
-	public void setValidacionlineamientos(List<Validacionlineamiento> validacionlineamientos) {
-		this.validacionlineamientos = validacionlineamientos;
-	}
-
-	public Validacionlineamiento addValidacionlineamiento(Validacionlineamiento validacionlineamiento) {
-		getValidacionlineamientos().add(validacionlineamiento);
-		validacionlineamiento.setLineamiento(this);
-
-		return validacionlineamiento;
-	}
-
-	public Validacionlineamiento removeValidacionlineamiento(Validacionlineamiento validacionlineamiento) {
-		getValidacionlineamientos().remove(validacionlineamiento);
-		validacionlineamiento.setLineamiento(null);
-
-		return validacionlineamiento;
+	public void setValidacion(Validacion validacion) {
+		this.validacion = validacion;
 	}
 
 }

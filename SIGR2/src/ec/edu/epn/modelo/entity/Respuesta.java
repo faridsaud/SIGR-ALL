@@ -2,7 +2,6 @@ package ec.edu.epn.modelo.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
@@ -32,9 +31,10 @@ public class Respuesta implements Serializable {
 	@Column(name="RESPUESTA_SELECCIONAR")
 	private String respuestaSeleccionar;
 
-	//bi-directional many-to-one association to Reactivorespuesta
-	@OneToMany(mappedBy="respuesta")
-	private List<Reactivorespuesta> reactivorespuestas;
+	//bi-directional many-to-one association to Reactivo
+	@ManyToOne
+	@JoinColumn(name="REACTIVO_ID")
+	private Reactivo reactivo;
 
 	public Respuesta() {
 	}
@@ -79,26 +79,12 @@ public class Respuesta implements Serializable {
 		this.respuestaSeleccionar = respuestaSeleccionar;
 	}
 
-	public List<Reactivorespuesta> getReactivorespuestas() {
-		return this.reactivorespuestas;
+	public Reactivo getReactivo() {
+		return this.reactivo;
 	}
 
-	public void setReactivorespuestas(List<Reactivorespuesta> reactivorespuestas) {
-		this.reactivorespuestas = reactivorespuestas;
-	}
-
-	public Reactivorespuesta addReactivorespuesta(Reactivorespuesta reactivorespuesta) {
-		getReactivorespuestas().add(reactivorespuesta);
-		reactivorespuesta.setRespuesta(this);
-
-		return reactivorespuesta;
-	}
-
-	public Reactivorespuesta removeReactivorespuesta(Reactivorespuesta reactivorespuesta) {
-		getReactivorespuestas().remove(reactivorespuesta);
-		reactivorespuesta.setRespuesta(null);
-
-		return reactivorespuesta;
+	public void setReactivo(Reactivo reactivo) {
+		this.reactivo = reactivo;
 	}
 
 }
