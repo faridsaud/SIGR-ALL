@@ -14,6 +14,7 @@ import ec.edu.epn.modelo.entity.Campo;
 import ec.edu.epn.modelo.entity.Grupo;
 import ec.edu.epn.modelo.entity.Reactivo;
 import ec.edu.epn.modelo.entity.Carrera;
+import ec.edu.epn.modelo.entity.Respuesta;
 import ec.edu.epn.modelo.entity.Topico;
 import ec.edu.epn.modelo.jpa.JPADAOFactory;
 
@@ -32,6 +33,7 @@ public class ReactivoCompletamientoBackingBean {
 	private List<Campo> listaCampos;
 	private List<Topico> listaTopicos;
 	private List<Grupo> listaGrupos;
+
 	
 	public List<Carrera> getListaCarreras() {
 		return listaCarreras;
@@ -134,6 +136,12 @@ public class ReactivoCompletamientoBackingBean {
 	public Reactivo getReactivo() {
 		if (reactivo == null) {
 			reactivo = new Reactivo();
+			List<Respuesta> listaRespuestas=new ArrayList<Respuesta>();
+			listaRespuestas.add(new Respuesta());
+			listaRespuestas.add(new Respuesta());
+			listaRespuestas.add(new Respuesta());
+			listaRespuestas.add(new Respuesta());
+			reactivo.setRespuestas(listaRespuestas);
 		}
 		return reactivo;
 	}
@@ -228,7 +236,7 @@ public class ReactivoCompletamientoBackingBean {
 	public void accionCancelar(ActionEvent actionEvent) {
 	
     addMessage("");
- }
+	}
      
     public void addMessage(String summary) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);

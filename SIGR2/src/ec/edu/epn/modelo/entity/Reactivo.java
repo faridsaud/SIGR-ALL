@@ -57,8 +57,8 @@ public class Reactivo implements Serializable {
 	@Column(name="REACTIVO_INSTRUCCION")
 	private String reactivoInstruccion;
 
-	@Column(name="REACTIVO_RESPUESTA_CORRECTA")
-	private int reactivoRespuestaCorrecta;
+	@Column(name="REACTIVO_PLANTEAMIENTO")
+	private String reactivoPlanteamiento;
 
 	@Column(name="REACTIVO_TIPO")
 	private String reactivoTipo;
@@ -180,12 +180,12 @@ public class Reactivo implements Serializable {
 		this.reactivoInstruccion = reactivoInstruccion;
 	}
 
-	public int getReactivoRespuestaCorrecta() {
-		return this.reactivoRespuestaCorrecta;
+	public String getReactivoPlanteamiento() {
+		return this.reactivoPlanteamiento;
 	}
 
-	public void setReactivoRespuestaCorrecta(int reactivoRespuestaCorrecta) {
-		this.reactivoRespuestaCorrecta = reactivoRespuestaCorrecta;
+	public void setReactivoPlanteamiento(String reactivoPlanteamiento) {
+		this.reactivoPlanteamiento = reactivoPlanteamiento;
 	}
 
 	public String getReactivoTipo() {

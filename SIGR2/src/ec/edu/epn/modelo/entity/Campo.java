@@ -14,7 +14,6 @@ import java.util.List;
 @NamedQueries({
 	@NamedQuery(name="Campo.findAll", query="SELECT c FROM Campo c"),
 	@NamedQuery(name="Campo.findbyNombre", query="SELECT c FROM Campo c WHERE c.carrera.carreraNombre=:nombreCarrera"),
-
 })
 public class Campo implements Serializable {
 	private static final long serialVersionUID = 1L;

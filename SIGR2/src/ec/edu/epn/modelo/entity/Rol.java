@@ -26,13 +26,13 @@ public class Rol implements Serializable {
 	@Column(name="ROL_NOMBRE")
 	private String rolNombre;
 
-	//bi-directional many-to-one association to Rolpermiso
-	@OneToMany(mappedBy="rol")
-	private List<Rolpermiso> rolpermisos;
-
 	//bi-directional many-to-one association to Usuariorol
 	@OneToMany(mappedBy="rol")
 	private List<Usuariorol> usuariorols;
+
+	//bi-directional many-to-one association to Rolpermiso
+	@OneToMany(mappedBy="rol")
+	private List<Rolpermiso> rolpermisos;
 
 	public Rol() {
 	}
@@ -61,28 +61,6 @@ public class Rol implements Serializable {
 		this.rolNombre = rolNombre;
 	}
 
-	public List<Rolpermiso> getRolpermisos() {
-		return this.rolpermisos;
-	}
-
-	public void setRolpermisos(List<Rolpermiso> rolpermisos) {
-		this.rolpermisos = rolpermisos;
-	}
-
-	public Rolpermiso addRolpermiso(Rolpermiso rolpermiso) {
-		getRolpermisos().add(rolpermiso);
-		rolpermiso.setRol(this);
-
-		return rolpermiso;
-	}
-
-	public Rolpermiso removeRolpermiso(Rolpermiso rolpermiso) {
-		getRolpermisos().remove(rolpermiso);
-		rolpermiso.setRol(null);
-
-		return rolpermiso;
-	}
-
 	public List<Usuariorol> getUsuariorols() {
 		return this.usuariorols;
 	}
@@ -103,6 +81,28 @@ public class Rol implements Serializable {
 		usuariorol.setRol(null);
 
 		return usuariorol;
+	}
+
+	public List<Rolpermiso> getRolpermisos() {
+		return this.rolpermisos;
+	}
+
+	public void setRolpermisos(List<Rolpermiso> rolpermisos) {
+		this.rolpermisos = rolpermisos;
+	}
+
+	public Rolpermiso addRolpermiso(Rolpermiso rolpermiso) {
+		getRolpermisos().add(rolpermiso);
+		rolpermiso.setRol(this);
+
+		return rolpermiso;
+	}
+
+	public Rolpermiso removeRolpermiso(Rolpermiso rolpermiso) {
+		getRolpermisos().remove(rolpermiso);
+		rolpermiso.setRol(null);
+
+		return rolpermiso;
 	}
 
 }

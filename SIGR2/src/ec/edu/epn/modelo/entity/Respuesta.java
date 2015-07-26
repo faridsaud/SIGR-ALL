@@ -22,6 +22,9 @@ public class Respuesta implements Serializable {
 	@Column(name="RESPUESTA_ARGUMENTACION")
 	private String respuestaArgumentacion;
 
+	@Column(name="RESPUESTA_CORRECTA")
+	private int respuestaCorrecta;
+
 	@Column(name="RESPUESTA_OPCION")
 	private String respuestaOpcion;
 
@@ -53,6 +56,14 @@ public class Respuesta implements Serializable {
 
 	public void setRespuestaArgumentacion(String respuestaArgumentacion) {
 		this.respuestaArgumentacion = respuestaArgumentacion;
+	}
+
+	public int getRespuestaCorrecta() {
+		return this.respuestaCorrecta;
+	}
+
+	public void setRespuestaCorrecta(int respuestaCorrecta) {
+		this.respuestaCorrecta = respuestaCorrecta;
 	}
 
 	public String getRespuestaOpcion() {
