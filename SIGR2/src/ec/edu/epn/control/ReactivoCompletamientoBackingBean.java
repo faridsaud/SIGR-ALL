@@ -193,7 +193,8 @@ public class ReactivoCompletamientoBackingBean {
 
 	public void setListReactivoHomeCalibradorReactivoCompletamiento(List<Reactivo> listReactivo) {
 	}
-	
+
+
 	public void onCarreraChange() {
 		this.listaCampos = JPADAOFactory.getFactory().getCampoDAO()
 				.findbyNombre(this.carrera);
@@ -227,7 +228,7 @@ public class ReactivoCompletamientoBackingBean {
 	public void accionCancelar(ActionEvent actionEvent) {
 	
     addMessage("");
-}
+ }
      
     public void addMessage(String summary) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);
