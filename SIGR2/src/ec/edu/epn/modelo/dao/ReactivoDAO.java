@@ -2,6 +2,8 @@ package ec.edu.epn.modelo.dao;
 
 import java.util.List;
 
+import javax.persistence.NamedQuery;
+
 import ec.edu.epn.modelo.entity.Reactivo;
 public interface ReactivoDAO extends GenericDAO<Reactivo,Integer> {
 
@@ -15,7 +17,7 @@ public interface ReactivoDAO extends GenericDAO<Reactivo,Integer> {
 	
 	public List<Reactivo> findReactivosPorAsignarByTopico(String nombreTopico);
 	
-
+	public List<Reactivo> findByTipoAndByEstado(String estadoReactivo, String tipoReactivo);
 	
 
 }

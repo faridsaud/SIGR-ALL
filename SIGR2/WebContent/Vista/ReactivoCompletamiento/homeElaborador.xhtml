@@ -1,0 +1,64 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/templates/BasicTemplate.xhtml">
+	<ui:define name="topContent">
+		<h:form>
+			<p:growl id="messages" />
+			<p:menubar>
+			</p:menubar>
+		</h:form>
+	</ui:define>
+	<ui:define name="content">
+		<h:form>
+			<p:dataTable id="tabla1" var="reactivo"
+				value="#{reactivoCompletamientoControl.getListReactivoHomeElaboradorReactivoCompletamiento()}"
+				paginator="true" rows="10">
+				<p:column filterBy="#{reactivo.reactivoId}" headerText="Id"
+					footerText="contains" filterMatchMode="contains">
+					<h:outputText value="#{reactivo.reactivoId}" />
+				</p:column>
+				<p:column filterBy="#{reactivo.reactivoInstruccion}"
+					headerText="Instruccion" footerText="contains"
+					filterMatchMode="contains">
+					<h:outputText value="#{reactivo.reactivoInstruccion}" />
+				</p:column>
+				<p:column filterBy="#{reactivo.taxonomiabloom.taxonomiaNombre}"
+					headerText="Taxonomia" footerText="contains"
+					filterMatchMode="contains">
+					<h:outputText value="#{reactivo.taxonomiabloom.taxonomiaNombre}" />
+ 				</p:column>
+ 				<p:column filterBy="#{reactivo.reactivoElaboradoPor}"
+					headerText="Elaborado Por" footerText="contains"
+					filterMatchMode="contains">
+					<h:outputText value="#{reactivo.reactivoElaboradoPor}" />
+				</p:column>
+ 				<p:column filterBy="#{reactivo.reactivoFechaModificacion}"
+					headerText="Ultima Fecha Modificacion" footerText="contains"
+					filterMatchMode="contains">
+					<h:outputText value="#{reactivo.reactivoFechaModificacion}" />
+				</p:column>
+				<p:column filterBy="#{reactivo.reactivoEstado}" headerText="Estado"
+					footerText="contains" filterMatchMode="contains">
+					<h:outputText value="#{reactivo.reactivoEstado}" />
+				</p:column>
+				
+				<p:column>
+					<f:facet name="header">Asignar</f:facet>
+					<p:commandButton value="Asignar"
+						action="#{reactivoControl.asignar()}">
+						<f:param name="#{reactivoControl.cmdAsignar}"
+							value="#{reactivo.reactivoId}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

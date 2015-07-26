@@ -80,4 +80,19 @@ public class JPAReactivoDAO extends JPAGenericDAO<Reactivo, Integer> implements
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Reactivo> findByTipoAndByEstado(String estadoReactivo, String tipoReactivo) {
+		try {
+			Query query = em.createNamedQuery("Reactivo.findByTipoAndByEstado");
+			query.setParameter("estadoReactivo", estadoReactivo);
+			query.setParameter("tipoReactivo", tipoReactivo);
+			return query.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ArrayList<Reactivo>();
+		}
+	}
+
+
 }
